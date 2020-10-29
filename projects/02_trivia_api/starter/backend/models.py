@@ -1,10 +1,11 @@
 import os
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
+from flask_serialize import FlaskSerializeMixin
 import json
 
 database_name = "trivia"
-database_path = "postgres://{}/{}".format('localhost:5432', database_name)
+database_path = "postgres://{}/{}".format('nora@localhost:5432', database_name)
 
 db = SQLAlchemy()
 
@@ -23,7 +24,7 @@ def setup_db(app, database_path=database_path):
 Question
 
 '''
-class Question(db.Model):  
+class Question(db.Model,FlaskSerializeMixin):  
   __tablename__ = 'questions'
 
   id = Column(Integer, primary_key=True)
